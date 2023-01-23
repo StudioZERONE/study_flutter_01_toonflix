@@ -25,32 +25,36 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-      backgroundColor: const Color(0xFFF4EDDB),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Click Counter',
-              style: TextStyle(fontSize: 30),
+        theme: ThemeData(
+          textTheme: const TextTheme(
+            titleLarge: TextStyle(
+              color: Colors.red,
             ),
-            for (var n in numbers) Text('$n'),
-            Text(
-              '$counter',
-              style: const TextStyle(fontSize: 30),
-            ),
-            IconButton(
-              iconSize: 40,
-              onPressed: onClicked,
-              icon: const Icon(
-                Icons.add_box_rounded,
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
-    ));
+        home: Scaffold(
+          backgroundColor: const Color(0xFFF4EDDB),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const MyLargeTitle(),
+                for (var n in numbers) Text('$n'),
+                Text(
+                  '$counter',
+                  style: const TextStyle(fontSize: 30),
+                ),
+                IconButton(
+                  iconSize: 40,
+                  onPressed: onClicked,
+                  icon: const Icon(
+                    Icons.add_box_rounded,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ));
   }
 
   @override
@@ -187,6 +191,23 @@ class _AppState extends State<App> {
               ),
             ),
           )),
+    );
+  }
+}
+
+class MyLargeTitle extends StatelessWidget {
+  const MyLargeTitle({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      'Click Counter',
+      style: TextStyle(
+        fontSize: 30,
+        color: Theme.of(context).textTheme.titleLarge?.color,
+      ),
     );
   }
 }
